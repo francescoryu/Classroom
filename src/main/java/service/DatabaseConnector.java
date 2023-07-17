@@ -23,12 +23,16 @@ public class DatabaseConnector {
         }
     }
 
-    public static ArrayList<ArrayList<String>> getData(String query) throws ClassNotFoundException, SQLException {
+    public static ArrayList<ArrayList<String>> getData(String query, Object... values) throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");
         String relativePath = "classroom.db";
         String connectionUrl = "jdbc:sqlite:" + relativePath;
         Connection conn = DriverManager.getConnection(connectionUrl);
         PreparedStatement statement = conn.prepareStatement(query);
+
+        for (int i = 0; i < values.length; i++) {
+            statement.setObject(i + 1, values[i]);
+        }
 
         ArrayList<ArrayList<String>> resultList = new ArrayList<>();
 
@@ -52,7 +56,7 @@ public class DatabaseConnector {
         return resultList;
     }
 
-    public static ArrayList<Object> getSingeData(String query, String value) throws ClassNotFoundException, SQLException {
+    public static ArrayList<Object> getSingleData(String query, String value) throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");
         String relativePath = "classroom.db";
         String connectionUrl = "jdbc:sqlite:" + relativePath;

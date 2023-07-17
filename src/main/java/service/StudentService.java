@@ -38,13 +38,16 @@ public class StudentService {
     public static ArrayList<Object> get(String email) throws ClassNotFoundException, SQLException {
         String query = "SELECT * FROM Student WHERE email = ?";
 
-        return DatabaseConnector.getSingeData(query, email);
+        return DatabaseConnector.getSingleData(query, email);
     }
 
-    public static ArrayList<ArrayList<String>> getAll() throws ClassNotFoundException, SQLException {
+    public static ArrayList<ArrayList<String>> getAllByCourse(String courseName) throws ClassNotFoundException, SQLException {
         ArrayList<ArrayList<String>> students;
-        String query = "SELECT * FROM Student";
-        students = DatabaseConnector.getData(query);
+        String query = "SELECT s.*" +
+                " FROM Student s" +
+                " JOIN Course c ON s.course_id = c.id" +
+                " WHERE c.courseName = ?";
+        students = DatabaseConnector.getData(query, courseName);
         return students;
     }
 }
