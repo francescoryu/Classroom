@@ -6,6 +6,7 @@ import controller.CourseController;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 import java.awt.*;
 import java.sql.SQLException;
@@ -54,9 +55,12 @@ public class Dashboard {
         descTextArea.setEnabled(false);
         descTextArea.setDisabledTextColor(Color.BLACK);
         descTextArea.setFont(new Font("Serif", Font.PLAIN, 15));
+        descTextArea.setBackground(Color.decode("#C2D8B9"));
 
         JScrollPane descScrollPane = new JScrollPane(descTextArea);
         descScrollPane.setPreferredSize(new Dimension(250, 300));
+        descScrollPane.setBorder(new LineBorder(Color.decode("#C2D8B9")));
+        descScrollPane.setBackground(Color.decode("#C2D8B9"));
 
         courseSelection.addActionListener(e -> {
             try {
