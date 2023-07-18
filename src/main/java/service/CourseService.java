@@ -11,4 +11,9 @@ public class CourseService {
         courses = DatabaseConnector.getData(query);
         return courses;
     }
+
+    public static ArrayList<Object> get(String courseName) throws SQLException, ClassNotFoundException {
+        String query = "SELECT * FROM Course WHERE courseName=?";
+        return DatabaseConnector.getSingleData(query, courseName);
+    }
 }
