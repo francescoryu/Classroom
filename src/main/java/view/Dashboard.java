@@ -52,7 +52,8 @@ public class Dashboard {
         descTextArea = new JTextArea();
         descTextArea.setLineWrap(true);
         descTextArea.setEnabled(false);
-        descTextArea.setForeground(Color.BLACK);
+        descTextArea.setDisabledTextColor(Color.BLACK);
+        descTextArea.setFont(new Font("Serif", Font.PLAIN, 15));
 
         JScrollPane descScrollPane = new JScrollPane(descTextArea);
         descScrollPane.setPreferredSize(new Dimension(250, 300));
