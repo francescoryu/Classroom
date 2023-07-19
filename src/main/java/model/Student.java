@@ -14,14 +14,16 @@ public class Student {
     String lastName;
     String email;
     String birthday;
+    String studentDesc;
 
     int course_id;
 
-    public Student(int id, String firstName, String lastName, String email, String birthday, int course_id) {
+    public Student(int id, String firstName, String lastName, String email, String birthday, String studentDesc, int course_id) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.birthday = birthday;
+        this.studentDesc = studentDesc;
         this.course_id = course_id;
         this.id = id;
     }

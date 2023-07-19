@@ -8,12 +8,13 @@ import java.util.ArrayList;
 
 public class StudentService {
     public static void create(Student student) throws ClassNotFoundException {
-        String query = "INSERT INTO Student (firstName, lastName, email, birthday, course_id) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Student (firstName, lastName, email, birthday, studentDesc, course_id) VALUES (?, ?, ?, ?, ?, ?)";
         DatabaseConnector.executeQuery(query,
                 student.getFirstName(),
                 student.getLastName(),
                 student.getEmail(),
                 student.getBirthday(),
+                student.getStudentDesc(),
                 student.getCourse_id());
     }
 
@@ -24,15 +25,16 @@ public class StudentService {
     }
 
     public static void update(Student student) throws ClassNotFoundException {
-        String query = "UPDATE Student SET firstName = ?, lastName = ?, email = ?, birthday = ?, course_id = ?" +
-                " WHERE id = ?";
+        String query = "UPDATE Student SET firstName = ?, lastName = ?, email = ?, birthday = ?, studentDesc = ?, course_id = ?" +
+                " WHERE email = ?";
         DatabaseConnector.executeQuery(query,
                 student.getFirstName(),
                 student.getLastName(),
                 student.getEmail(),
                 student.getBirthday(),
+                student.getStudentDesc(),
                 student.getCourse_id(),
-                student.getId());
+                student.getEmail());
     }
 
     public static ArrayList<Object> get(String email) throws ClassNotFoundException, SQLException {
