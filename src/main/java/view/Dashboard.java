@@ -2,6 +2,7 @@ package view;
 
 import comp.buttons.PrimaryButton;
 import comp.buttons.SecondaryButton;
+import comp.labels.TitleLabel;
 import controller.CourseController;
 
 import javax.swing.*;
@@ -71,9 +72,7 @@ public class Dashboard {
             }
         });
 
-        welcomeLabel = new JLabel("Welcome!");
-        welcomeLabel.setFont(new Font("", Font.BOLD, 20));
-        welcomeLabel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        welcomeLabel = new TitleLabel("Welcome!");
 
         continueButton = new PrimaryButton("Continue");
         exitButton = new SecondaryButton("Exit");
@@ -107,5 +106,13 @@ public class Dashboard {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setSize(500, 300);
         mainFrame.setVisible(true);
+
+        continueButton.addActionListener(e -> {
+            try {
+                new CourseView((String) courseSelection.getSelectedItem());
+            } catch (SQLException | ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
     }
 }

@@ -16,4 +16,8 @@ public class Course {
         this.courseDesc = courseDesc;
         this.teacher_id = teacher_id;
     }
+
+    public Course() {
+
+    }
 }
