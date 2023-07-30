@@ -7,6 +7,7 @@ import controller.StudentController;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -42,13 +43,14 @@ public class CourseView extends JFrame {
 
         studentOverviewPanel = new JPanel();
         studentOverviewPanel.setBorder(new EmptyBorder(10, 5, 10, 5));
+        studentOverviewPanel.setBorder(new LineBorder(Color.RED));
         studentOverviewPanel.setBackground(Color.decode("#e6f7ff"));
         studentOverviewPanel.add(courseLabel);
 
         JScrollPane studentScrollPane = new JScrollPane(studentOverviewPanel);
         studentScrollPane.setBackground(Color.decode("#e6f7ff"));
         studentScrollPane.setBorder(null);
-        studentScrollPane.setPreferredSize(new Dimension(250, 100));
+        studentScrollPane.setPreferredSize(new Dimension(250, 0));
 
 
         overViewLabel = new TitleLabel("Overview");
@@ -71,6 +73,14 @@ public class CourseView extends JFrame {
             courseSelection.addItem(courseName.get(1));
         }
 
+        studentInfoPanel = new JPanel();
+
+        courseButton = new PrimaryButton("More about Course");
+
+        interactionPanel = new JPanel();
+        interactionPanel.setBackground(Color.decode("#e6f7ff"));
+        interactionPanel.add(courseButton, BorderLayout.NORTH);
+
         informationPanel.add(courseSelection);
         courseSelection.addActionListener(e -> {
             try {
@@ -83,6 +93,21 @@ public class CourseView extends JFrame {
                 for (ArrayList<String> student : students) {
                     JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
                     JButton studentButton = new JButton(student.get(1) + " " + student.get(2));
+                    studentButton.addActionListener(e1 -> {
+                        JLabel firstName = new JLabel("Firstname: " + student.get(1));
+                        JLabel lastName = new JLabel("Lastname: " + student.get(2));
+                        JLabel email = new JLabel("Email: " + student.get(3));
+                        JLabel birthday = new JLabel("Birthday: " + student.get(4));
+                        JLabel studentDesc = new JLabel("Description: " + student.get(5));
+
+                        studentInfoPanel.add(firstName);
+                        studentInfoPanel.add(lastName);
+                        studentInfoPanel.add(email);
+                        studentInfoPanel.add(birthday);
+                        studentInfoPanel.add(studentDesc);
+
+                        interactionPanel.add(studentInfoPanel, BorderLayout.CENTER);
+                    });
                     studentButton.setFont(new Font("", Font.BOLD, 12));
                     studentButton.setPreferredSize(buttonSize);
                     studentButton.setMaximumSize(buttonSize);
@@ -101,13 +126,6 @@ public class CourseView extends JFrame {
                 throw new RuntimeException(ex);
             }
         });
-
-
-        courseButton = new PrimaryButton("More about Course");
-
-        interactionPanel = new JPanel();
-        interactionPanel.setBackground(Color.decode("#e6f7ff"));
-        interactionPanel.add(courseButton, BorderLayout.NORTH);
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.add(informationPanel, BorderLayout.NORTH);
